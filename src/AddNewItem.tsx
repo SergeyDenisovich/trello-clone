@@ -1,0 +1,29 @@
+import React from 'react';
+import {AddItemButton} from './styles';
+import {NewItremForm} from './NewItemForm';
+
+interface AddNewItemProps {
+    onAdd(text: string): void
+    toggleButtonText: string
+    dark?: boolean
+}
+
+export const AddNewItem = (props: AddNewItemProps) => {
+    const [showForm, setShowForm] = React.useState(false);
+    const {onAdd, toggleButtonText, dark} = props;
+
+    if(showForm) {
+        return(
+            <NewItremForm onAdd={text => {
+                onAdd(text) 
+                setShowForm(false)}}
+            />
+        );
+    }
+
+    return(
+        <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
+            {toggleButtonText}
+        </AddItemButton>
+    );
+}
